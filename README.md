@@ -2,6 +2,10 @@
 
 This is the starter for the Postura Website.
 
+## Live Link
+
+https://postura.onrender.com
+
 ## Getting started
 1. Clone this repository (only this branch)
 
