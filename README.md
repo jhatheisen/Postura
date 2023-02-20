@@ -1,6 +1,6 @@
-# Flask React Project
+# Postura
 
-This is the starter for the Flask React project.
+This is the starter for the Postura Website.
 
 ## Getting started
 1. Clone this repository (only this branch)
