@@ -1,11 +1,20 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import { login } from '../../store/session';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleDemo = () => {
+    dispatch(login('demo@aa.io', 'password'))
+    history.push('/home')
+  }
 
 	return (
 		<ul>
@@ -17,6 +26,11 @@ function Navigation({ isLoaded }){
 					<ProfileButton user={sessionUser} />
 				</li>
 			)}
+      {!sessionUser && (
+        <li>
+          <button className='demoButton' onClick={handleDemo}>Try Demo</button>
+        </li>
+      )}
 		</ul>
 	);
 }
