@@ -30,6 +30,18 @@ class Task(db.Model):
         back_populates="tasks"
     )
 
+    def to_dict(self):
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'due_date': self.due_date,
+            'creation_date': self.creation_date,
+            'project_id': self.project_id,
+            'users': [user.to_dict() for user in self.users]
+        }
+
 # join table
 
 users_tasks = db.Table(
