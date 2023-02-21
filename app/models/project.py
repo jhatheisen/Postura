@@ -28,6 +28,18 @@ class Project(db.Model):
         back_populates="projects"
     )
 
+    def to_dict(self):
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'due_date': self.due_date,
+            'owner_id': self.owner_id,
+            'owner': self.owner.to_dict(),
+            'users': [user.to_dict() for user in self.users]
+        }
+
 # join table
 
 users_projects = db.Table(
