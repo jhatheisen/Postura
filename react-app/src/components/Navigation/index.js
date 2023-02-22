@@ -11,9 +11,9 @@ function Navigation({ isLoaded }){
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleDemo = () => {
-    dispatch(login('demo@aa.io', 'password'))
-    history.push('/home')
+  const handleDemo = async () => {
+    await dispatch(login('demo@aa.io', 'password'))
+    await history.push('/home')
   }
 
 	return (

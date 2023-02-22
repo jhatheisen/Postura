@@ -30,6 +30,51 @@ def curr_user_projects():
         })
     return {"Projects": trimmedProjects}
 
+@project_routes.route('/', methods=["POST"])
+@login_required
+def create_project():
+   print('reached')
+   form = CreateProjectForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+
+   if form.validate_on_submit():
+      data = form.data
+
+      date_object = None
+
+      if data["due_date"]:
+        try:
+          date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
+        except:
+          return {
+              "message": "Validation Error",
+              "statusCode": 400,
+              "errors": {
+                "due_date": "Invalid date format, must be formatted '12-31-2020'"
+              }
+            }, 400
+
+      newProject = Project(
+         name = data["name"],
+         owner_id = current_user.id,
+         description = data["description"],
+         due_date = date_object
+      )
+
+      db.session.add(newProject)
+      db.session.commit()
+
+      allProjects = Project.query.all()
+
+      return {
+         "id": allProjects[len(allProjects)-1].id,
+         "owner_id": current_user.id,
+         "name": data["name"],
+         "description": data["description"],
+         "due_date": date_object
+      }
+   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 @project_routes.route('/<int:projectId>')
 @login_required
 def single_project(projectId):
@@ -57,47 +102,6 @@ def single_project(projectId):
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
-
-@project_routes.route('', methods=["POST"])
-@login_required
-def create_project():
-   form = CreateProjectForm()
-   form['csrf_token'].data = request.cookies['csrf_token']
-
-   if form.validate_on_submit():
-      data = form.data
-
-      try:
-         date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
-      except:
-         return {
-            "message": "Validation Error",
-            "statusCode": 400,
-            "errors": {
-              "due_date": "Invalid date format, must be formatted '12-31-2020'"
-            }
-          }, 400
-
-      newProject = Project(
-         name = data["name"],
-         owner_id = current_user.id,
-         description = data["description"],
-         due_date = date_object
-      )
-
-      db.session.add(newProject)
-      db.session.commit()
-
-      allProjects = Project.query.all()
-
-      return {
-         "id": allProjects[len(allProjects)-1].id,
-         "owner_id": current_user.id,
-         "name": data["name"],
-         "description": data["description"],
-         "due_date": date_object
-      }
-   return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @project_routes.route('/<int:projectId>', methods=["PUT"])
 @login_required

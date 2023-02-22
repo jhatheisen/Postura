@@ -9,7 +9,7 @@ def name_validator(form, field):
         raise ValidationError("Project name must be between 3 and 25 characters")
 
 def description_validator(form, field):
-    if len(field.data) < 3 or len(field.data) > 250 :
+    if field.data is not None and (len(field.data) < 3 or len(field.data) > 250) :
         raise ValidationError("Project name must be between 3 and 25 characters")
 
 
