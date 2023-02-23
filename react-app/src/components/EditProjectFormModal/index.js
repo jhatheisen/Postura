@@ -1,16 +1,29 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
-import { thunkCreateProject } from "../../store/project";
-import "./CreateProjectForm.css"
+import { thunkEditProject } from "../../store/project";
+import "./EditProjectForm.css"
 
-function CreateProjectFormModal() {
+function EditProjectFormModal({project}) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [name, setName] = useState(project.name);
+  const [description, setDescription] = useState(project.description);
+
+  const projects = useSelector(state => state.projects)
+
+  let date = project.due_date
+  // add 8 hours
+  date = new Date(date)
+  date.setHours(date.getHours()+8)
+  // format date
+  let year = date.getFullYear()
+  let month = ('0'+ (date.getMonth()+1)).slice(-2)
+  let day = ('0'+ date.getDate()).slice(-2)
+  date = `${year}-${month}-${day}`
+  // set date
+  const [dueDate, setDueDate] = useState(date);
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
@@ -24,14 +37,19 @@ function CreateProjectFormModal() {
     const month = dueDate.slice(firstDash + 1, secondDash);
     const day = dueDate.slice(secondDash + 1)
 
-    const newProject = {}
-    if (name) newProject.name = name;
-    if (description) newProject.description = description;
-    if (dueDate) newProject.due_date = `${month}-${day}-${year}`;
+    const editedProject = {}
+    if (name) editedProject.name = name;
+    if (description) editedProject.description = description;
+    if (dueDate) editedProject.due_date = `${month}-${day}-${year}`;
 
-    console.log('new Project:', newProject)
+    console.log('edited Project:', editedProject)
 
-    const data = await dispatch(thunkCreateProject(newProject));
+    let stateI;
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].id == project.id) stateI = i;
+    }
+
+    const data = await dispatch(thunkEditProject(editedProject, project.id, stateI));
 
     console.log('data:', data)
 
@@ -44,7 +62,7 @@ function CreateProjectFormModal() {
 
   return (
     <>
-      <h1>Create Project</h1>
+      <h1>Edit Project</h1>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -82,4 +100,4 @@ function CreateProjectFormModal() {
   );
 }
 
-export default CreateProjectFormModal;
+export default EditProjectFormModal;

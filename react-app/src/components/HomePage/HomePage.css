@@ -1,3 +1,14 @@
 .allProjectsBox {
   border: 1px solid;
 }
+
+.projectBox {
+  display: flex;
+}
+
+.projectDropdown {
+  background-color: #3E3E40;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}

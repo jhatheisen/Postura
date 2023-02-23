@@ -1,6 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const LOAD_USERS = "session/LOAD_USERS";
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -9,6 +10,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
 	type: REMOVE_USER,
+});
+
+const loadUsers = (Users) => ({
+  type: LOAD_USERS,
+  payload: Users
 });
 
 const initialState = { user: null };
@@ -94,12 +100,35 @@ export const signUp = (username, email, password) => async (dispatch) => {
 	}
 };
 
+export const thunkGetUsers = () => async (dispatch) => {
+  const response = await fetch("/api/users/");
+
+  if (response.ok) {
+    const data = await response.json();
+		if (data.errors) {
+      return data;
+		}
+
+		dispatch(loadUsers(data));
+    return data
+  }
+};
+
 export default function reducer(state = initialState, action) {
+  let newState;
 	switch (action.type) {
 		case SET_USER:
-			return { user: action.payload };
+      newState = {...state};
+      newState.user = action.payload
+			return newState;
 		case REMOVE_USER:
-			return { user: null };
+      newState = {...state}
+      newState.user = null;
+			return newState;
+    case LOAD_USERS:
+      newState = {...state}
+      newState.users = action.payload.users;
+      return newState
 		default:
 			return state;
 	}
