@@ -7,6 +7,7 @@ import SignupFormModal from "../SignupFormModal";
 import { thunkDeleteProject } from "../../store/project";
 import EditProjectFormModal from "../EditProjectFormModal";
 import { useHistory } from "react-router-dom";
+import UsersProjectFormModal from "../UsersProjectFormModal";
 
 function ProjectButton({project}) {
   const dispatch = useDispatch();
@@ -53,7 +54,12 @@ function ProjectButton({project}) {
       <div className={ulClassName} ref={ulRef}>
         {  showMenu &&
         <>
-          <button>Add Users</button>
+          <OpenModalButton
+            buttonText="Manage Users"
+            onItemClick={closeMenu}
+            className="UsersProjectButton"
+            modalComponent={<UsersProjectFormModal project={project}/>}
+          />
           <OpenModalButton
             buttonText="Edit Project"
             onItemClick={closeMenu}

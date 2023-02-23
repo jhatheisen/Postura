@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { thunkEditProject } from "../../store/project";
-import "./EditProjectForm.css"
+import "./UsersProjectForm.css"
+import { thunkGetUsers } from "../../store/session";
 
-function EditProjectFormModal({project}) {
+function UsersProjectFormModal({project}) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [name, setName] = useState(project.name);
+  const [name, setName] = useState();
   const [description, setDescription] = useState(project.description);
+
+  useEffect(() => {
+   dispatch(thunkGetUsers())
+  },[])
 
   const projects = useSelector(state => state.projects)
 
@@ -30,26 +35,7 @@ function EditProjectFormModal({project}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // get date
-    const firstDash = dueDate.indexOf('-')
-    const year = dueDate.slice(0, firstDash)
-    const secondDash = dueDate.indexOf('-', firstDash + 1);
-    const month = dueDate.slice(firstDash + 1, secondDash);
-    const day = dueDate.slice(secondDash + 1)
-
-    const editedProject = {}
-    if (name) editedProject.name = name;
-    if (description) editedProject.description = description;
-    if (dueDate) editedProject.due_date = `${month}-${day}-${year}`;
-
-    console.log('edited Project:', editedProject)
-
-    let stateI;
-    for (let i = 0; i < projects.length; i++) {
-      if (projects[i].id == project.id) stateI = i;
-    }
-
-    const data = await dispatch(thunkEditProject(editedProject, project.id, stateI));
+    const data = await dispatch();
 
     console.log('data:', data)
 
@@ -61,16 +47,18 @@ function EditProjectFormModal({project}) {
   };
 
   return (
-    <>
-      <h1>Edit Project</h1>
+    <div className="membersModal">
+      <h1>Manage Users</h1>
+      <hr/>
       <form onSubmit={handleSubmit}>
+        <h2>Invite by Email</h2>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label>
-          Name
+          Email
           <input
             type="text"
             value={name}
@@ -78,26 +66,10 @@ function EditProjectFormModal({project}) {
             required
           />
         </label>
-        <label>
-          Description
-          <textarea
-            type="textarea"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-        <label>
-          Due Date
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-          />
-        </label>
         <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 
-export default EditProjectFormModal;
+export default UsersProjectFormModal;

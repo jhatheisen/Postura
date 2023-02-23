@@ -62,8 +62,8 @@ function CreateProjectFormModal() {
         </label>
         <label>
           Description
-          <input
-            type="text"
+          <textarea
+            type="textarea"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
