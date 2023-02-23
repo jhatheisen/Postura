@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import SplashPage from './components/SplashPage';
@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 
 function App() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/splash">
             <SplashPage />
+          </Route>
+          <Route path="/">
+            { history.push('/splash') }
           </Route>
         </Switch>
       )}

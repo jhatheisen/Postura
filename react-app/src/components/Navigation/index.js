@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import { login } from '../../store/session';
@@ -10,28 +10,30 @@ function Navigation({ isLoaded }){
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const handleDemo = async () => {
     await dispatch(login('demo@aa.io', 'password'))
     await history.push('/home')
   }
 
+  const onSplash = location.pathname == '/splash';
+
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
+		<div className='NavBar'>
+      { !onSplash &&
+        <NavLink exact to="/home">Home</NavLink>
+      }
+      { onSplash &&
+        <NavLink exact to="/splash">Home</NavLink>
+      }
       {!sessionUser && (
-        <li>
-          <button className='demoButton' onClick={handleDemo}>Try Demo</button>
-        </li>
+        <button className='demoButton' onClick={handleDemo}>Try Demo</button>
       )}
-		</ul>
+			{isLoaded && (
+					<ProfileButton user={sessionUser} />
+			)}
+		</div>
 	);
 }
 

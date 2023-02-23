@@ -1,7 +1,19 @@
 .profile-dropdown {
   position: absolute;
+  background-color: #1E1F21;
+  color: white;
+  right: 10px;
+  top: 20px;
 }
 
 .hidden {
   display: none;
+}
+
+.NavBar {
+  background-color: #1E1F21;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

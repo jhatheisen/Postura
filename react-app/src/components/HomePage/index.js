@@ -5,6 +5,7 @@ import { thunkGetUserProjects } from '../../store/project';
 import CreateProjectFormModal from '../CreateProjectFormModal';
 import OpenModalButton from '../OpenModalButton';
 import './HomePage.css'
+import ProjectButton from './ProjectsButton';
 
 function HomePage() {
 
@@ -47,7 +48,7 @@ function HomePage() {
   return (
     <div className='homePage'>
       <h2>{dayWeek}, {month} {today.getUTCDate()}</h2>
-      <h1>Hello, {user.username}</h1>
+      <h1>Welcome back, {user.username}</h1>
       <div className='allProjectsBox'>
         <OpenModalButton
           buttonText="Create Project"
@@ -59,6 +60,7 @@ function HomePage() {
           userProjects.map(project => (
             <div className='projectBox'>
               <NavLink exact to={`/projects/${project.id}`}>{project.name}</NavLink>
+              <ProjectButton project={project}/>
             </div>
           ))
         }
