@@ -124,16 +124,19 @@ def edit_project(projectId):
    if form.validate_on_submit():
       data = form.data
 
-      try:
-         date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
-      except:
-         return {
-            "message": "Validation Error",
-            "statusCode": 400,
-            "errors": {
-              "due_date": "Invalid date format, must be formatted '12-31-2020'"
-            }
-          }, 400
+      date_object = None
+
+      if data["due_date"]:
+        try:
+          date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
+        except:
+          return {
+              "message": "Validation Error",
+              "statusCode": 400,
+              "errors": {
+                "due_date": "Invalid date format, must be formatted '12-31-2020'"
+              }
+            }, 400
 
       edit_project.name = data["name"]
       edit_project.description = data["description"]

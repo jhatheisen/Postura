@@ -18,7 +18,7 @@ class Project(db.Model):
 
     # relationship with tasks
 
-    tasks = db.relationship("Task", back_populates="project")
+    tasks = db.relationship("Task", back_populates="project", cascade="all,delete")
 
     # many to many between users and projects
 
