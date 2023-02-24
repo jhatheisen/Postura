@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import UsersProjectFormModal from "../UsersProjectFormModal";
 
 function ProjectButton({project}) {
+
   const dispatch = useDispatch();
   const history = useHistory();
   const ulRef = useRef();
@@ -17,6 +18,7 @@ function ProjectButton({project}) {
   const [showMenu, setShowMenu] = useState(false);
 
   const projects = useSelector(state => state.projects)
+  const user = useSelector(state => state.session.user)
 
   const openMenu = () => {
     if (showMenu) return;
@@ -41,11 +43,7 @@ function ProjectButton({project}) {
   const closeMenu = () => setShowMenu(false);
 
   const handleDeleteProject = async () => {
-    let stateI;
-    for (let i = 0; i < projects.length; i++) {
-      if (projects[i].id == project.id) stateI = i;
-    }
-    await dispatch(thunkDeleteProject(project.id, stateI))
+    await dispatch(thunkDeleteProject(project.id))
   }
 
   return (
@@ -55,7 +53,7 @@ function ProjectButton({project}) {
         {  showMenu &&
         <>
           <OpenModalButton
-            buttonText="Manage Users"
+            buttonText="Manage Members"
             onItemClick={closeMenu}
             className="UsersProjectButton"
             modalComponent={<UsersProjectFormModal project={project}/>}

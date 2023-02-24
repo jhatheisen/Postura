@@ -30,26 +30,12 @@ function EditProjectFormModal({project}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // get date
-    const firstDash = dueDate.indexOf('-')
-    const year = dueDate.slice(0, firstDash)
-    const secondDash = dueDate.indexOf('-', firstDash + 1);
-    const month = dueDate.slice(firstDash + 1, secondDash);
-    const day = dueDate.slice(secondDash + 1)
-
     const editedProject = {}
     if (name) editedProject.name = name;
     if (description) editedProject.description = description;
-    if (dueDate) editedProject.due_date = `${month}-${day}-${year}`;
+    if (dueDate) editedProject.due_date = dueDate;
 
-    console.log('edited Project:', editedProject)
-
-    let stateI;
-    for (let i = 0; i < projects.length; i++) {
-      if (projects[i].id == project.id) stateI = i;
-    }
-
-    const data = await dispatch(thunkEditProject(editedProject, project.id, stateI));
+    const data = await dispatch(thunkEditProject(editedProject, project.id));
 
     console.log('data:', data)
 
