@@ -80,7 +80,7 @@ function EditProjectFormModal({project}) {
             onChange={(e) => setDueDate(e.target.value)}
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="cleanButton">Submit</button>
       </form>
     </>
   );

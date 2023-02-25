@@ -1,0 +1,15 @@
+.createProjectBox, .createProjectForm {
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+input, textarea {
+  width: 80%;
+}
+
+label {
+  display: flex;
+  float: column;
+}

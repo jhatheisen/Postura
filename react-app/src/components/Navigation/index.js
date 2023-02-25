@@ -22,13 +22,13 @@ function Navigation({ isLoaded }){
 	return (
 		<div className='NavBar'>
       { !onSplash &&
-        <NavLink exact to="/home">Home</NavLink>
+        <NavLink exact to="/home"><img src={process.env.PUBLIC_URL + "/logo-no-background.png"} className="logo"></img></NavLink>
       }
       { onSplash &&
-        <NavLink exact to="/splash">Home</NavLink>
+        <NavLink exact to="/splash"><img src={process.env.PUBLIC_URL + "/logo-no-background.png"} className="logo"></img></NavLink>
       }
       {!sessionUser && (
-        <button className='demoButton' onClick={handleDemo}>Try Demo</button>
+        <button className='demoButton cleanButton' onClick={handleDemo}>Try Demo</button>
       )}
 			{isLoaded && (
 					<ProfileButton user={sessionUser} />

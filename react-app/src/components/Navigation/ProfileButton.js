@@ -42,36 +42,38 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+    <div>
+      <button onClick={openMenu} className="profileButton">
+        <i className="fas fa-user-circle fa-3x" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
+          <div className="userDetails flexCol">
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <button onClick={handleLogout} className="cleanButton">Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flexCol">
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
+              className="cleanButton"
             />
 
             <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
+              className="cleanButton"
             />
-          </>
+          </div>
         )}
       </ul>
-    </>
+    </div>
   );
 }
 

@@ -20,5 +20,14 @@
 
 #modal-content {
   position: absolute;
-  background-color:white;
+  background-color: #1E1F21;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+ol {
+  list-style-type: none;
+}
+ul {
+  list-style-type: none;
 }

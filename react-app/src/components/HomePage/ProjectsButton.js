@@ -48,23 +48,23 @@ function ProjectButton({project}) {
 
   return (
     <div>
-      <button onClick={openMenu}><i className="fa-solid fa-gear"/></button>
+      <button onClick={openMenu} className="cleanButton"><i className="fa-solid fa-gear"/></button>
       <div className={ulClassName} ref={ulRef}>
         {  showMenu &&
         <>
           <OpenModalButton
             buttonText="Manage Members"
             onItemClick={closeMenu}
-            className="UsersProjectButton"
+            className="UsersProjectButton cleanButton"
             modalComponent={<UsersProjectFormModal project={project}/>}
           />
           <OpenModalButton
             buttonText="Edit Project"
             onItemClick={closeMenu}
-            className="EditProjectButton"
+            className="EditProjectButton cleanButton"
             modalComponent={<EditProjectFormModal project={project}/>}
           />
-          <button onClick={handleDeleteProject}>Delete</button>
+          <button onClick={handleDeleteProject} className="cleanButton">Delete</button>
         </>
         }
       </div>

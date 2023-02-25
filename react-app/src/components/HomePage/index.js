@@ -42,13 +42,17 @@ function HomePage() {
 
   return (
     <div className='homePage'>
+      <div className='homeBar'>
+        <h2>Home</h2>
+      </div>
       <h2>{dayWeek}, {month} {today.getUTCDate()}</h2>
       <h1>Welcome back, {user.username}</h1>
       <div className='allProjectsBox'>
+        <h2>Projects</h2>
         <OpenModalButton
           buttonText="Create Project"
           onItemClick={closeMenu}
-          className="CreateProjectButton"
+          className="CreateProjectButton cleanButton"
           modalComponent={<CreateProjectFormModal/>}
         />
         { userProjects.map(project => {
