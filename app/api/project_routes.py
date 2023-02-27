@@ -21,13 +21,15 @@ def curr_user_projects():
     trimmedProjects = []
     for project in user_projects:
         project = project.to_dict()
-        trimmedProjects.append({
-            "id": project["id"],
-            "owner_id": project["owner_id"],
-            "name": project["name"],
-            "description": project['description'],
-            "due_date": project["due_date"]
-        })
+        for user in project['users']:
+           if user['id'] == current_user.id:
+              trimmedProjects.append({
+                  "id": project["id"],
+                  "owner_id": project["owner_id"],
+                  "name": project["name"],
+                  "description": project['description'],
+                  "due_date": project["due_date"]
+              })
     return {"Projects": trimmedProjects}
 
 @project_routes.route('/', methods=["POST"])
