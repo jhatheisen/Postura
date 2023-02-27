@@ -1,1 +1,50 @@
 /* TODO Add site wide styles */
+html, body, #app, #app>div {
+  height: 100%;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+h1, h2, h3, p, label, #text, li {
+  color: white;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  transition: all .25s;
+  color: rgb(255, 255, 255);
+}
+
+#root {
+  background-color: #1E1F21;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+.cleanButton {
+  border: none;
+  padding: 5px;
+  font-size: medium;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.cleanButton:hover {
+  transition: all .25s;
+  background-color: rgb(133, 129, 129);
+  color: white;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}

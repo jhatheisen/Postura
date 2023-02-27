@@ -1,9 +1,19 @@
 .profile-dropdown {
   position: absolute;
-  background-color: #1E1F21;
+  background-color: #3E3E40;
   color: white;
-  right: 10px;
-  top: 20px;
+  right: 0px;
+  top: 50px;
+  border: rgb(88, 84, 84) 1px solid;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.userDetails {
+  gap: 10px;
 }
 
 .hidden {
@@ -11,9 +21,21 @@
 }
 
 .NavBar {
-  background-color: #1E1F21;
+  background-color: #3E3E40;
+  height: 50px;
   position: sticky;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom: rgb(88, 84, 84) 1px solid;
+}
+
+.profileButton {
+  border: none;
+  border-radius: 12px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
 }

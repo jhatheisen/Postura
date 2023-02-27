@@ -32,28 +32,30 @@ function CreateProjectFormModal() {
   };
 
   return (
-    <>
+    <div className="createProjectBox">
       <h1>Create Project</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="createProjectForm">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label>
-          Name
+
           <input
             type="text"
             value={name}
+            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
         <label>
-          Description
+
           <textarea
             type="textarea"
             value={description}
+            placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
@@ -65,9 +67,9 @@ function CreateProjectFormModal() {
             onChange={(e) => setDueDate(e.target.value)}
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="cleanButton">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 
