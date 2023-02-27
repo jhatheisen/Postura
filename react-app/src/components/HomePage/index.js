@@ -12,14 +12,9 @@ function HomePage() {
   const dispatch = useDispatch();
   const ulRef = useRef();
 
-  const userProjects = useSelector(state => state.projects);
+  const userProjects = useSelector(state => state.projects.projects);
   const user = useSelector(state => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
-
-  // const openMenu = () => {
-  //   if (showMenu) return;
-  //   setShowMenu(true);
-  // };
 
   useEffect(() => {
     dispatch(thunkGetUserProjects());
@@ -56,13 +51,17 @@ function HomePage() {
           className="CreateProjectButton"
           modalComponent={<CreateProjectFormModal/>}
         />
-        {
-          userProjects.map(project => (
-            <div className='projectBox'>
-              <NavLink exact to={`/projects/${project.id}`}>{project.name}</NavLink>
-              <ProjectButton project={project}/>
-            </div>
-          ))
+        { userProjects.map(project => {
+            const ownsProject = project.owner_id == user.id;
+            return (
+              <div className='projectBox'>
+                <NavLink exact to={`/projects/${project.id}`}>{project.name}</NavLink>
+                { ownsProject &&
+                  <ProjectButton project={project}/>
+                }
+              </div>
+            )
+          })
         }
       </div>
     </div>
