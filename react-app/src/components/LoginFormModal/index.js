@@ -51,7 +51,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="cleanButton">Log In</button>
       </form>
     </>
   );

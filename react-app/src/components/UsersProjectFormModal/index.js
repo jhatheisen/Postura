@@ -71,7 +71,7 @@ function UsersProjectFormModal({project}) {
             required
             />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="cleanButton">Submit</button>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
