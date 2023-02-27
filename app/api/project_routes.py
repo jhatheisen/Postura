@@ -44,14 +44,12 @@ def create_project():
 
       if data["due_date"]:
         try:
-          date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
+          date_object = datetime.strptime(data["due_date"], '%Y-%m-%d').date()
         except:
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": {
-                "due_date": "Invalid date format, must be formatted '12-31-2020'"
-              }
+              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       newProject = Project(
@@ -60,6 +58,10 @@ def create_project():
          description = data["description"],
          due_date = date_object
       )
+
+      user = User.query.get(current_user.id)
+
+      newProject.users.append(user)
 
       db.session.add(newProject)
       db.session.commit()
@@ -81,12 +83,16 @@ def single_project(projectId):
     #find project
     project = Project.query.get(projectId)
 
+    print('project: ', project)
+    print(project is None)
+
     # if can't find return
     if project is None:
       return {
             "message": "Project couldn't be found",
             "statusCode": 404
         }, 404
+    print('passing')
 
     # if in project
     project = project.to_dict()
@@ -99,9 +105,9 @@ def single_project(projectId):
     # else don't return
 
     return {
-            "message": "Project couldn't be found",
-            "statusCode": 404
-        }, 404
+            "message": "Project not owned",
+            "statusCode": 403
+        }, 403
 
 @project_routes.route('/<int:projectId>', methods=["PUT"])
 @login_required
@@ -128,14 +134,12 @@ def edit_project(projectId):
 
       if data["due_date"]:
         try:
-          date_object = datetime.strptime(data["due_date"], '%m-%d-%Y').date()
+          date_object = datetime.strptime(data["due_date"], '%Y-%m-%d').date()
         except:
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": {
-                "due_date": "Invalid date format, must be formatted '12-31-2020'"
-              }
+              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       edit_project.name = data["name"]
@@ -173,7 +177,6 @@ def delete_project(projectId):
 
    return {"message": "Successfully deleted"}
 
-
 @project_routes.route('/<int:projectId>/users/<int:userId>', methods=["POST"])
 @login_required
 def add_user(projectId, userId):
@@ -195,9 +198,7 @@ def add_user(projectId, userId):
     return {
       "message": "Validation Error",
       "statusCode": 400,
-      "errors": {
-        "user": "User is already assigned to project",
-      }
+      "errors": ['"user": "User is already assigned to project"']
     }, 400
 
    user = User.query.get(userId)
@@ -214,7 +215,8 @@ def add_user(projectId, userId):
    return {
         "user_id": userId,
         "project_id": projectId,
-        "username": user.to_dict()['username']
+        "username": user.to_dict()['username'],
+        "email" : user.to_dict()['email']
     }, 200
 
 @project_routes.route('/<int:projectId>/users/<int:userId>', methods=["DELETE"])
@@ -246,9 +248,7 @@ def remove_user(projectId, userId):
     return {
       "message": "Validation Error",
       "statusCode": 400,
-      "errors": {
-        "user": "User is not added to project",
-      }
+      "errors": ['"user": "User is not added to project"']
     }, 400
 
    project.users.remove(user)

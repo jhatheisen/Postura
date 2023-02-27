@@ -17,23 +17,12 @@ function CreateProjectFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // get date
-    const firstDash = dueDate.indexOf('-')
-    const year = dueDate.slice(0, firstDash)
-    const secondDash = dueDate.indexOf('-', firstDash + 1);
-    const month = dueDate.slice(firstDash + 1, secondDash);
-    const day = dueDate.slice(secondDash + 1)
-
     const newProject = {}
     if (name) newProject.name = name;
     if (description) newProject.description = description;
-    if (dueDate) newProject.due_date = `${month}-${day}-${year}`;
-
-    console.log('new Project:', newProject)
+    if (dueDate) newProject.due_date = dueDate;
 
     const data = await dispatch(thunkCreateProject(newProject));
-
-    console.log('data:', data)
 
     if (data.errors) {
       setErrors(data.errors);
