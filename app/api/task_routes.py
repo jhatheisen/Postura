@@ -9,4 +9,4 @@ task_routes = Blueprint('tasks', __name__)
 @task_routes.route('/current')
 @login_required
 def curr_user_tasks():
-    return 
+    return
