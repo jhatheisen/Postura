@@ -7,3 +7,12 @@
 hr {
   width: 100%;
 }
+
+.taskBox {
+  border: 1px solid white;
+}
+.taskBox:hover {
+  transition: all .25s;
+  background-color: rgba(211, 211, 211, 0.445);
+  cursor: pointer;
+}
