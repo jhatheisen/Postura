@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkGetProject } from "../../store/project";
-import { thunkGetProjectTasks } from "../../store/tasks";
+import { thunkGetProjectTasks, thunkDeleteTask } from "../../store/tasks";
 import OpenModalButton from "../OpenModalButton";
+import CreateTaskFormModal from "../CreateTaskFormModal";
+import EditTaskFormModal from "../EditTaskFormModal";
 import './SingleProjectPage.css'
 
 function SingleProjectPage() {
@@ -36,6 +38,11 @@ function SingleProjectPage() {
   const closeMenu = () => setShowMenu(false);
 
   if (!project) return null;
+  if (!tasks) return null;
+
+  const handleDeleteTask = async (taskId) => {
+    await dispatch(thunkDeleteTask(taskId))
+  }
 
   return (
     <div className="singleProjectPage">
@@ -57,7 +64,7 @@ function SingleProjectPage() {
           buttonText="Create Task"
           onItemClick={closeMenu}
           className="CreateTaskButton cleanButton"
-          // modalComponent={<CreateTaskFormModal/>}
+          modalComponent={<CreateTaskFormModal projectId={project.id}/>}
         />
       <div className="allTasks">
         {tasks.map(task => (
@@ -66,6 +73,13 @@ function SingleProjectPage() {
             <p>{task.description}</p>
             <p>due: {task.due_date}</p>
             <p>started on: {task.creation_date}</p>
+            <OpenModalButton
+              buttonText="Edit Task"
+              onItemClick={closeMenu}
+              className="EditTaskButton cleanButton"
+              modalComponent={<EditTaskFormModal task={task}/>}
+            />
+            <button onClick={() => handleDeleteTask(task.id)} className="cleanButton">Delete</button>
           </div>
         ))}
       </div>
