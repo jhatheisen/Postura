@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Project, db, User
+from app.models import Project, db, User, Task
 from ..forms.project_form import CreateProjectForm, EditProjectForm
+from ..forms.task_form import CreateTaskForm
 from .auth_routes import validation_errors_to_error_messages
 
 from datetime import datetime
@@ -21,19 +22,20 @@ def curr_user_projects():
     trimmedProjects = []
     for project in user_projects:
         project = project.to_dict()
-        trimmedProjects.append({
-            "id": project["id"],
-            "owner_id": project["owner_id"],
-            "name": project["name"],
-            "description": project['description'],
-            "due_date": project["due_date"]
-        })
+        for user in project['users']:
+           if user['id'] == current_user.id:
+              trimmedProjects.append({
+                  "id": project["id"],
+                  "owner_id": project["owner_id"],
+                  "name": project["name"],
+                  "description": project['description'],
+                  "due_date": project["due_date"]
+              })
     return {"Projects": trimmedProjects}
 
 @project_routes.route('/', methods=["POST"])
 @login_required
 def create_project():
-   print('reached')
    form = CreateProjectForm()
    form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -176,6 +178,83 @@ def delete_project(projectId):
    db.session.commit()
 
    return {"message": "Successfully deleted"}
+
+@project_routes.route('/<int:projectId>/tasks')
+@login_required
+def get_project_tasks(projectId):
+
+   project = Project.query.get(projectId)
+   users = project.to_dict()["users"]
+
+   if not idInDictArr(users, current_user.id):
+    return {'errors': ['Unauthorized']}, 401
+
+   project_tasks = Task.query.filter_by(project_id=projectId)
+   return {"Tasks": [task.to_dict() for task in project_tasks]}
+
+@project_routes.route('/<int:projectId>/tasks', methods=["POST"])
+@login_required
+def create_project_task(projectId):
+   form = CreateTaskForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+
+   if form.validate_on_submit():
+      data = form.data
+
+      date_object = None
+
+      createDate = datetime.now().date()
+
+      if data["due_date"]:
+        try:
+          date_object = datetime.strptime(data["due_date"], '%Y-%m-%d').date()
+        except:
+          return {
+              "message": "Validation Error",
+              "statusCode": 400,
+              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
+            }, 400
+
+      try:
+        if date_object < createDate:
+          return {
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": ["creation_date: Due date cannot come before today's Date"]
+              }, 400
+      except:
+         return {
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": ["due_date: Due Date must exist"]
+              }, 400
+
+      newTask = Task(
+         name = data["name"],
+         project_id = projectId,
+         description = data["description"],
+         due_date = date_object,
+         creation_date = createDate
+      )
+
+      user = User.query.get(current_user.id)
+
+      newTask.users.append(user)
+
+      db.session.add(newTask)
+      db.session.commit()
+
+      allTasks = Task.query.all()
+
+      return {
+         "id": allTasks[len(allTasks)-1].id,
+         "project_id": projectId,
+         "name": data["name"],
+         "description": data["description"],
+         "due_date": date_object,
+         "creation_date": createDate
+      }
+   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 @project_routes.route('/<int:projectId>/users/<int:userId>', methods=["POST"])
 @login_required
