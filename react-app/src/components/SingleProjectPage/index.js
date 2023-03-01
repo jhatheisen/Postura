@@ -68,7 +68,10 @@ function SingleProjectPage() {
           modalComponent={<CreateTaskFormModal projectId={project.id}/>}
         />
       <div className="allTasks">
-        {tasks.map(task => (
+        {tasks.map(task =>{
+          console.log(task)
+          console.log(task.user)
+          return (
           <div className="taskBox" onClick={() => console.log('clicked')}>
             <h3>{task.name}</h3>
             <p>{task.description}</p>
@@ -92,7 +95,7 @@ function SingleProjectPage() {
             />
             <button onClick={() => handleDeleteTask(task.id)} className="cleanButton">Delete</button>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   )
