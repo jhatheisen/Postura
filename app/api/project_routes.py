@@ -296,7 +296,7 @@ def add_user(projectId, userId):
     return {
       "message": "Validation Error",
       "statusCode": 400,
-      "errors": ['"user": "User is already assigned to project"']
+      "errors": ['user: User is already assigned to project']
     }, 400
 
    user = User.query.get(userId)

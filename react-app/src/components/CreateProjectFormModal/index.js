@@ -24,8 +24,6 @@ function CreateProjectFormModal() {
 
     const data = await dispatch(thunkCreateProject(newProject));
 
-    console.log(data.errors)
-
     if (data.errors) {
       setErrors(data.errors);
     } else {
@@ -39,7 +37,7 @@ function CreateProjectFormModal() {
       <form onSubmit={handleSubmit} className="createProjectForm">
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
         <label>

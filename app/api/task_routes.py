@@ -62,7 +62,7 @@ def add_user(taskId, userId):
       return {
         "message": "Validation Error",
         "statusCode": 400,
-        "errors": ['user: User is not added to project']
+        "errors": ['User is not added to project']
       }, 400
 
     taskUsers = task.to_dict()["users"]
@@ -72,9 +72,9 @@ def add_user(taskId, userId):
        return {
           "message": "Validation Error",
           "statusCode": 400,
-          "errors": {
-            "user": "User is already assigned to task",
-          }
+          "errors": [
+            "user: User is already assigned to task",
+          ]
         }, 400
 
     task.users.append(user)
@@ -119,7 +119,7 @@ def remove_user(taskId, userId):
       return {
         "message": "Validation Error",
         "statusCode": 400,
-        "errors": ['user: User is not added to project']
+        "errors": ['User is not added to project']
       }, 400
 
     taskUsers = task.to_dict()["users"]
@@ -175,7 +175,7 @@ def edit_task(taskId):
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
+              "errors": ["Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       createDate = editing_task.creation_date.date()
@@ -191,7 +191,7 @@ def edit_task(taskId):
          return {
                 "message": "Validation Error",
                 "statusCode": 400,
-                "errors": ["due_date: Due Date must exist"]
+                "errors": ["Due Date must exist"]
               }, 400
 
       editing_task.name = data["name"]
