@@ -13,16 +13,20 @@ function EditProjectFormModal({project}) {
 
   const projects = useSelector(state => state.projects)
 
-  let date = project.due_date
-  // add 8 hours
-  date = new Date(date)
-  date.setHours(date.getHours()+8)
-  // format date
-  let year = date.getFullYear()
-  let month = ('0'+ (date.getMonth()+1)).slice(-2)
-  let day = ('0'+ date.getDate()).slice(-2)
-  date = `${year}-${month}-${day}`
-  // set date
+  let date;
+
+  if (project.due_date != null) {
+    date = project.due_date
+    // add 8 hours
+    date = new Date(date)
+    date.setHours(date.getHours()+8)
+    // format date
+    let year = date.getFullYear()
+    let month = ('0'+ (date.getMonth()+1)).slice(-2)
+    let day = ('0'+ date.getDate()).slice(-2)
+    date = `${year}-${month}-${day}`
+    // set date
+  }
   const [dueDate, setDueDate] = useState(date);
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
