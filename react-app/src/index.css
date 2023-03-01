@@ -48,3 +48,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.errorText {
+  color: red;
+}
