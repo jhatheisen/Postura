@@ -37,8 +37,6 @@ function EditTaskFormModal({task}) {
 
     const data = await dispatch(thunkEditTask(editedTask, task.id));
 
-    console.log('data:', data)
-
     if (data.errors) {
       setErrors(data.errors);
     } else {
@@ -52,7 +50,7 @@ function EditTaskFormModal({task}) {
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
         <label>

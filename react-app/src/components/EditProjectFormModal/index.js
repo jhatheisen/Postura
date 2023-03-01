@@ -41,8 +41,6 @@ function EditProjectFormModal({project}) {
 
     const data = await dispatch(thunkEditProject(editedProject, project.id));
 
-    console.log('data:', data)
-
     if (data.errors) {
       setErrors(data.errors);
     } else {
@@ -56,7 +54,7 @@ function EditProjectFormModal({project}) {
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
         <label>

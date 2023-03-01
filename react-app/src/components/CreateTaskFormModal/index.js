@@ -23,8 +23,6 @@ function CreateTaskFormModal({projectId}) {
     if (description) newTask.description = description;
     if (dueDate) newTask.due_date = dueDate;
 
-    console.log(newTask)
-    console.log(projectId)
     const data = await dispatch(thunkCreateProjectTask(projectId, newTask));
 
     if (data.errors) {
@@ -40,7 +38,7 @@ function CreateTaskFormModal({projectId}) {
       <form onSubmit={handleSubmit} className="createTaskForm">
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
         <label>
