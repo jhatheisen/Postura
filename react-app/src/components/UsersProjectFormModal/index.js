@@ -21,7 +21,6 @@ function UsersProjectFormModal({project}) {
   const projectDetails = useSelector(state => state.projects.projectDetails)
 
   const [errors, setErrors] = useState([]);
-  const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

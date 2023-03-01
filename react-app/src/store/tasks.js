@@ -2,6 +2,7 @@ const GET_PROJECT_TASKS = 'project/GET_PROJECT_TASKS';
 const CREATE_PROJECT_TASK = 'project/CREATE_PROJECT_TASK';
 const DELETE_TASK = 'project/DELETE_TASK';
 const EDIT_TASK = 'project/EDIT_TASK';
+const ADD_USER_TASK = "project/ADD_USER_TASK";
 
 const getProjectTasks = (projects) => ({
   type: GET_PROJECT_TASKS,

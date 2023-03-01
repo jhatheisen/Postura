@@ -6,6 +6,7 @@ import { thunkGetProjectTasks, thunkDeleteTask } from "../../store/tasks";
 import OpenModalButton from "../OpenModalButton";
 import CreateTaskFormModal from "../CreateTaskFormModal";
 import EditTaskFormModal from "../EditTaskFormModal";
+import UsersTaskFormModal from "../UsersTaskFormModal";
 import './SingleProjectPage.css'
 
 function SingleProjectPage() {
@@ -73,6 +74,16 @@ function SingleProjectPage() {
             <p>{task.description}</p>
             <p>due: {task.due_date}</p>
             <p>started on: {task.creation_date}</p>
+            <h3>Asignee(s)</h3>
+            { task.users.map(user => (
+              <p>{user.username}</p>
+            ))}
+            <OpenModalButton
+              buttonText="Manage Asignees"
+              onItemClick={closeMenu}
+              className="UsersTaskButton cleanButton"
+              modalComponent={<UsersTaskFormModal task={task}/>}
+            />
             <OpenModalButton
               buttonText="Edit Task"
               onItemClick={closeMenu}

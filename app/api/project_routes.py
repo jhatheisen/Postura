@@ -54,6 +54,14 @@ def create_project():
               "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
+      today = datetime.now().date()
+      if date_object < today:
+          return {
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": ["creation_date: Due date cannot come before today's Date"]
+              }, 400
+
       newProject = Project(
          name = data["name"],
          owner_id = current_user.id,
@@ -143,6 +151,14 @@ def edit_project(projectId):
               "statusCode": 400,
               "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
             }, 400
+
+      today = datetime.now().date()
+      if date_object < today:
+          return {
+                "message": "Validation Error",
+                "statusCode": 400,
+                "errors": ["creation_date: Due date cannot come before today's Date"]
+              }, 400
 
       edit_project.name = data["name"]
       edit_project.description = data["description"]

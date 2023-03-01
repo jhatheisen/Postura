@@ -24,6 +24,8 @@ function CreateProjectFormModal() {
 
     const data = await dispatch(thunkCreateProject(newProject));
 
+    console.log(data.errors)
+
     if (data.errors) {
       setErrors(data.errors);
     } else {
