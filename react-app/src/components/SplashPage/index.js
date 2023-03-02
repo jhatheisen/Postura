@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
+import splashPic from './splashPic.jpg'
 
 function SplashPage() {
 
@@ -17,12 +18,30 @@ function SplashPage() {
   }
 
   return (
+    <>
     <div className='splashBackground'>
-      <h1>Splash Page</h1>
-      {!sessionUser && (
-        <button className='demoButton cleanButton' onClick={handleDemo}>Try Demo</button>
-      )}
+      <div className='leftSplashBox'>
+        <h1>The perfect platform for planning your project</h1>
+        <div className='smallHr'>
+          <hr></hr>
+        </div>
+        <p>Want to organize your team and stay on top of tasks?
+          Do you want to efficiently organize workflow to members of your team?
+          Feel like you need a place to plan out and manage all the projects in your life?
+        </p>
+        <div className='smallHr'>
+          <hr></hr>
+        </div>
+        <p>
+          Try out postura and discover a better way to plan tasks, simple, consice, and efficient.
+        </p>
+        {!sessionUser && (
+          <button className='demoButton' onClick={handleDemo}>Try Demo</button>
+          )}
+      </div>
+      <img src={splashPic} className="splashPic"></img>
     </div>
+    </>
   )
 }
 
