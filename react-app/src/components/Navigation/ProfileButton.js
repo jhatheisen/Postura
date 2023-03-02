@@ -50,8 +50,9 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <div>
-      <button onClick={openMenu} className="profileButton">
+    <div >
+      <button onClick={openMenu} className="profileButton flexRow">
+        { !sessionUser && <h3>Get Started</h3>}
         <i className="fas fa-user-circle fa-3x" />
       </button>
       <ul className={ulClassName} ref={ulRef}>

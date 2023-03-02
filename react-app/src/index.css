@@ -18,9 +18,8 @@ a:hover {
   color: rgb(255, 255, 255);
 }
 
-#root {
+body {
   background-color: #1E1F21;
-  height: 100vh;
 }
 
 body {
@@ -51,4 +50,26 @@ body {
 
 .errorText {
   color: red;
+}
+
+input, textarea{
+  width: 80%;
+  border-radius: 12px;
+}
+
+textarea {
+  resize: none;
+  height: 5vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.fa-circle-user {
+  color: white;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

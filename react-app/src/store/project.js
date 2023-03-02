@@ -164,6 +164,7 @@ export default function projectReducer(state = initialState, action) {
     case REMOVE_USER:
       newState = {...state}
       newState.projectDetails.users = newState.projectDetails.users.filter(user => user.id != action.payload)
+      return newState
     case CREATE_PROJECT:
       newState = {...state}
       newState.projects = [...newState.projects, action.payload]

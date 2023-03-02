@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { thunkCreateProject } from "../../store/project";
-import { thunkCreateProjectTask } from "../../store/tasks";
+import { thunkCreateProjectTask, thunkGetProjectTasks } from "../../store/tasks";
 import "./CreateTaskForm.css"
 
 function CreateTaskFormModal({projectId}) {
@@ -24,6 +24,7 @@ function CreateTaskFormModal({projectId}) {
     if (dueDate) newTask.due_date = dueDate;
 
     const data = await dispatch(thunkCreateProjectTask(projectId, newTask));
+    dispatch(thunkGetProjectTasks(projectId))
 
     if (data.errors) {
       setErrors(data.errors);
@@ -41,33 +42,44 @@ function CreateTaskFormModal({projectId}) {
             <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
-        <label>
-
+        <div>
+          <label for="name">
+            Name
+          </label>
           <input
             type="text"
+            id="name"
             value={name}
+            maxLength={25}
             placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </label>
-        <label>
-
+        </div>
+        <div>
+          <label for="description">
+            Description (optional)
+          </label>
           <textarea
             type="textarea"
+            id="description"
             value={description}
             placeholder="Description"
+            maxLength={250}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </label>
-        <label>
-          Due Date
+        </div>
+        <div>
+          <label for="dueDate">
+            Due Date
+          </label>
           <input
             type="date"
+            id="dueDate"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />
-        </label>
+        </div>
         <button type="submit" className="cleanButton">Submit</button>
       </form>
     </div>

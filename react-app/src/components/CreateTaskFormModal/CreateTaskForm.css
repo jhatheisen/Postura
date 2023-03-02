@@ -1,0 +1,24 @@
+.createTaskBox, .createTaskForm {
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.createTaskForm * {
+  width: 90%;
+  padding: 10px;
+}
+
+input, textarea {
+  width: 80%;
+  border-radius: 12px;
+}
+
+textarea {
+  resize: none;
+  height: 5vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

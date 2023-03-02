@@ -207,7 +207,7 @@ def get_project_tasks(projectId):
    if not idInDictArr(users, current_user.id):
     return {'errors': ['Unauthorized']}, 401
 
-   project_tasks = Task.query.filter_by(project_id=projectId)
+   project_tasks = Task.query.filter_by(project_id=projectId).order_by(Task.due_date)
    return {"Tasks": [task.to_dict() for task in project_tasks]}
 
 @project_routes.route('/<int:projectId>/tasks', methods=["POST"])

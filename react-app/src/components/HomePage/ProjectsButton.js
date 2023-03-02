@@ -39,7 +39,7 @@ function ProjectButton({project}) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const ulClassName = "projectDropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "projectDropdown" + (showMenu ? " flexCol" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   const handleDeleteProject = async () => {
@@ -48,7 +48,7 @@ function ProjectButton({project}) {
 
   return (
     <div>
-      <button onClick={openMenu} className="cleanButton"><i className="fa-solid fa-gear"/></button>
+      <button onClick={openMenu} className="cleanButton"><i className="fa-solid fa-gear fa-xl"/></button>
       <div className={ulClassName} ref={ulRef}>
         {  showMenu &&
         <>

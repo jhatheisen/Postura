@@ -2,18 +2,85 @@
   display: flex;
   flex-direction: column;
   background-color: #1E1F21;
-  margin: 20px;
+  margin: 40px;
 }
 
 hr {
   width: 100%;
 }
 
+.importanceDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 30%;
+}
+.topHr {
+  margin: 35px;
+}
+
 .taskBox {
   border: 1px solid white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px;
+  height: fit-content;
 }
+.leftTopBar {
+  width: 79%;
+}
+
+.singleProjectMembers, .taskAssignee {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskAssignee  {
+  margin-bottom: 20px;
+}
+
+.rightTopBar {
+  width: 20%;
+  margin-left: 10px;
+}
+
+.topProjectBar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5;
+}
+
 .taskBox:hover {
   transition: all .25s;
   background-color: rgba(211, 211, 211, 0.445);
   cursor: pointer;
+}
+
+.createTaskButton {
+  width: fit-content;
+  border: none;
+  padding: 10px;
+  font-size: medium;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin: 15px;
+}
+
+.createTaskButton:hover {
+  transition: all .25s;
+  background-color: rgb(133, 129, 129);
+  color: white;
+}
+
+.allTasks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: flex-start;
 }
