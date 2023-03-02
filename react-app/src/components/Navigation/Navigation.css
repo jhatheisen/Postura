@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   border-bottom: rgb(88, 84, 84) 1px solid;
 }
 
@@ -38,4 +39,11 @@
   cursor: pointer;
   background-color: transparent;
   color: white;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px
 }

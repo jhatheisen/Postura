@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
+import { login } from "../../store/session";
 
 function ProfileButton({ user }) {
+  const sessionUser = useSelector(state => state.session.user);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
@@ -38,6 +41,11 @@ function ProfileButton({ user }) {
     history.push('/splash')
   };
 
+  const handleDemo = async () => {
+    await dispatch(login('demo@aa.io', 'password'))
+    await history.push('/home')
+  }
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
@@ -57,19 +65,27 @@ function ProfileButton({ user }) {
           </div>
         ) : (
           <div className="flexCol">
+            <div>
             <OpenModalButton
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
               className="cleanButton"
             />
-
+            <i className='fa-solid fa-right-to-bracket'></i>
+            </div>
+            <div>
             <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
               className="cleanButton"
             />
+            <i className="fa-solid fa-user-plus"></i>
+            </div>
+            {!sessionUser && (
+              <button className='demoButton cleanButton' onClick={handleDemo}>Try Demo</button>
+            )}
           </div>
         )}
       </ul>
