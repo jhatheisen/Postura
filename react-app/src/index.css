@@ -18,9 +18,8 @@ a:hover {
   color: rgb(255, 255, 255);
 }
 
-#root {
+body {
   background-color: #1E1F21;
-  height: 100vh;
 }
 
 body {

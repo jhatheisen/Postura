@@ -16,6 +16,9 @@ function HomePage() {
   const user = useSelector(state => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
 
+  const colors = ["black","lightblue","lightgreen","red","yellow","magenta","olive"]
+
+
   useEffect(() => {
     dispatch(thunkGetUserProjects());
 
@@ -50,11 +53,11 @@ function HomePage() {
       <div className='allProjectsBox'>
         <h2>Projects</h2>
         <div className='createProjectDiv'>
-          <i class="fa-solid fa-list-check fa-xl" style={{paddingRight: "5px"}}></i>
+          <i class="fa-solid fa-square-plus fa-4x" style={{paddingRight: "10px", color: "white"}}></i>
           <OpenModalButton
             buttonText="Create Project"
             onItemClick={closeMenu}
-            className="createProjectButton cleanButton"
+            className="createProjectButton"
             modalComponent={<CreateProjectFormModal/>}
           />
         </div>
@@ -64,7 +67,7 @@ function HomePage() {
               <div className='flexRow'>
                 <NavLink exact to={`/projects/${project.id}`}>
                   <div className='projectBox'>
-                    <i class="fa-solid fa-list-check fa-xl"></i>
+                    <i class="fa-solid fa-list-check fa-4x" style={{color: colors[project.id % colors.length]}}></i>
                     <p>{project.name}</p>
                   </div>
                 </NavLink>

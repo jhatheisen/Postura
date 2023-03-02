@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { thunkCreateProject } from "../../store/project";
-import { thunkCreateProjectTask } from "../../store/tasks";
+import { thunkCreateProjectTask, thunkGetProjectTasks } from "../../store/tasks";
 import "./CreateTaskForm.css"
 
 function CreateTaskFormModal({projectId}) {
@@ -24,6 +24,7 @@ function CreateTaskFormModal({projectId}) {
     if (dueDate) newTask.due_date = dueDate;
 
     const data = await dispatch(thunkCreateProjectTask(projectId, newTask));
+    dispatch(thunkGetProjectTasks(projectId))
 
     if (data.errors) {
       setErrors(data.errors);

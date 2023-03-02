@@ -40,7 +40,20 @@
 }
 
 .createProjectButton {
-  width: fit-content;
+  border: none;
+  padding: 10px;
+  font-size: medium;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.createProjectButton:hover {
+  transition: all .25s;
+  background-color: rgb(133, 129, 129);
+  color: white;
 }
 
 .projectDropdown {
@@ -56,4 +69,6 @@
 
 .createProjectDiv {
   padding: 10px;
+  display: flex;
+  align-items: center;
 }

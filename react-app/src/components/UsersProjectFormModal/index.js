@@ -50,7 +50,6 @@ function UsersProjectFormModal({project}) {
   const handleRemoveUser = async (user) => {
 
     const data = await dispatch(thunkRemoveUser(project.id, user.id));
-    dispatch(thunkGetProject(project.id))
 
     if (data.errors) {
       setErrors(data.errors);

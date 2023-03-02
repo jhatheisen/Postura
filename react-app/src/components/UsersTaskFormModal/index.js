@@ -79,6 +79,7 @@ function UsersTaskFormModal({task}) {
         ))}
       </div>
       <hr/>
+      <h3>Click to Add Assignees</h3>
       <div className="projectMembersBox">
         {members.map(member => (
           <div className="member" onClick={() => handleAddAssignee(member)}>
