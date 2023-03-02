@@ -73,7 +73,7 @@ def add_user(taskId, userId):
           "message": "Validation Error",
           "statusCode": 400,
           "errors": [
-            "user: User is already assigned to task",
+            "User is already assigned to task",
           ]
         }, 400
 
@@ -185,7 +185,7 @@ def edit_task(taskId):
           return {
                 "message": "Validation Error",
                 "statusCode": 400,
-                "errors": ["creation_date: Due date cannot come before today's Date"]
+                "errors": ["Due date cannot come before today's Date"]
               }, 400
       except:
          return {
