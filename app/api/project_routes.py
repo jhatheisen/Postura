@@ -51,7 +51,7 @@ def create_project():
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
+              "errors": ["Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       today = datetime.now().date()
@@ -60,7 +60,7 @@ def create_project():
             return {
                   "message": "Validation Error",
                   "statusCode": 400,
-                  "errors": ["creation_date: Due date cannot come before today's Date"]
+                  "errors": ["Due date cannot come before today's Date"]
                 }, 400
 
       newProject = Project(
@@ -150,7 +150,7 @@ def edit_project(projectId):
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
+              "errors": ["Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       today = datetime.now().date()
@@ -159,7 +159,7 @@ def edit_project(projectId):
             return {
                   "message": "Validation Error",
                   "statusCode": 400,
-                  "errors": ["creation_date: Due date cannot come before today's Date"]
+                  "errors": ["Due date cannot come before today's Date"]
                 }, 400
 
       edit_project.name = data["name"]
@@ -230,7 +230,7 @@ def create_project_task(projectId):
           return {
               "message": "Validation Error",
               "statusCode": 400,
-              "errors": ["due_date: Invalid date format, must be formatted '2020-12-31'"]
+              "errors": ["Invalid date format, must be formatted '2020-12-31'"]
             }, 400
 
       try:
@@ -238,13 +238,13 @@ def create_project_task(projectId):
           return {
                 "message": "Validation Error",
                 "statusCode": 400,
-                "errors": ["creation_date: Due date cannot come before today's Date"]
+                "errors": ["Due date cannot come before today's Date"]
               }, 400
       except:
          return {
                 "message": "Validation Error",
                 "statusCode": 400,
-                "errors": ["due_date: Due Date must exist"]
+                "errors": ["Due Date must exist"]
               }, 400
 
       newTask = Task(
@@ -296,7 +296,7 @@ def add_user(projectId, userId):
     return {
       "message": "Validation Error",
       "statusCode": 400,
-      "errors": ['user: User is already assigned to project']
+      "errors": ['User is already assigned to project']
     }, 400
 
    user = User.query.get(userId)
@@ -346,7 +346,7 @@ def remove_user(projectId, userId):
     return {
       "message": "Validation Error",
       "statusCode": 400,
-      "errors": ['"user": "User is not added to project"']
+      "errors": ['User is not added to project']
     }, 400
 
    project.users.remove(user)

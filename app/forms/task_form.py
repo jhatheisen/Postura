@@ -8,7 +8,7 @@ def name_validator(form, field):
 
 def description_validator(form, field):
     if field.data is not None and (len(field.data) < 3 or len(field.data) > 250) :
-        raise ValidationError("Task name must be between 3 and 25 characters")
+        raise ValidationError("Task description must be between 3 and 25 characters")
 
 
 

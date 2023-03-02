@@ -1,21 +1,16 @@
 import React from 'react';
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useHistory, useLocation, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { login } from '../../store/session';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
-	const sessionUser = useSelector(state => state.session.user);
+
+  const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
-  const handleDemo = async () => {
-    await dispatch(login('demo@aa.io', 'password'))
-    await history.push('/home')
-  }
 
   const onSplash = location.pathname == '/splash';
 
@@ -27,9 +22,11 @@ function Navigation({ isLoaded }){
       { onSplash &&
         <NavLink exact to="/splash"><img src={process.env.PUBLIC_URL + "/logo-no-background.png"} className="logo"></img></NavLink>
       }
-      {!sessionUser && (
-        <button className='demoButton cleanButton' onClick={handleDemo}>Try Demo</button>
-      )}
+      <div className='about'>
+      <p>Created By: Jhass Theisen</p>
+      <a target='_blank' href="https://github.com/jhatheisen"><i className="fa-brands fa-github"/> Github</a>
+      <a target='_blank' href="https://www.linkedin.com/in/jhass-theisen-a92863202/"><i className="fa-brands fa-linkedin"/> LinkedIn</a>
+      </div>
 			{isLoaded && (
 					<ProfileButton user={sessionUser} />
 			)}
