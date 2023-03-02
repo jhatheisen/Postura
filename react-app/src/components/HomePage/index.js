@@ -49,17 +49,25 @@ function HomePage() {
       <h1>Welcome back, {user.username}</h1>
       <div className='allProjectsBox'>
         <h2>Projects</h2>
-        <OpenModalButton
-          buttonText="Create Project"
-          onItemClick={closeMenu}
-          className="CreateProjectButton cleanButton"
-          modalComponent={<CreateProjectFormModal/>}
-        />
+        <div className='createProjectDiv'>
+          <i class="fa-solid fa-list-check fa-xl" style={{paddingRight: "5px"}}></i>
+          <OpenModalButton
+            buttonText="Create Project"
+            onItemClick={closeMenu}
+            className="createProjectButton cleanButton"
+            modalComponent={<CreateProjectFormModal/>}
+          />
+        </div>
         { userProjects.map(project => {
             const ownsProject = project.owner_id == user.id;
             return (
-              <div className='projectBox'>
-                <NavLink exact to={`/projects/${project.id}`}>{project.name}</NavLink>
+              <div className='flexRow'>
+                <NavLink exact to={`/projects/${project.id}`}>
+                  <div className='projectBox'>
+                    <i class="fa-solid fa-list-check fa-xl"></i>
+                    <p>{project.name}</p>
+                  </div>
+                </NavLink>
                 { ownsProject &&
                   <ProjectButton project={project}/>
                 }

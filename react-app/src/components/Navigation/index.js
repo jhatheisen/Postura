@@ -24,8 +24,8 @@ function Navigation({ isLoaded }){
       }
       <div className='about'>
       <p>Created By: Jhass Theisen</p>
-      <a target='_blank' href="https://github.com/jhatheisen"><i className="fa-brands fa-github"/> Github</a>
-      <a target='_blank' href="https://www.linkedin.com/in/jhass-theisen-a92863202/"><i className="fa-brands fa-linkedin"/> LinkedIn</a>
+      <a target='_blank' href="https://github.com/jhatheisen"><i className="fa-brands fa-github fa-xl"/> Github</a>
+      <a target='_blank' href="https://www.linkedin.com/in/jhass-theisen-a92863202/"><i className="fa-brands fa-linkedin fa-xl"/> LinkedIn</a>
       </div>
 			{isLoaded && (
 					<ProfileButton user={sessionUser} />

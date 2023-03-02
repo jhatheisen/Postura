@@ -2,14 +2,11 @@
   display: flex;
   border-radius: 12px;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  width: 400px;
 }
 
-input, textarea {
-  width: 80%;
-}
-
-label {
-  display: flex;
-  float: column;
+.createProjectForm * {
+  width: 90%;
+  padding: 10px;
 }

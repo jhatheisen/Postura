@@ -58,8 +58,9 @@ function UsersTaskFormModal({task}) {
   }
 
   return (
-    <div className="assigneesModal">
+    <div className="assigneesBox">
       <h1>Manage Assignees</h1>
+      <hr></hr>
       <ul>
           {errors.map((error, idx) => (
             <li key={idx} className="errorText">{error}</li>
@@ -68,18 +69,23 @@ function UsersTaskFormModal({task}) {
       { assignees.length == 0 &&
         <h3>No one assigned to task, add a user below...</h3>
       }
-      {assignees.map(assignee => (
-        <div className="currentAssigneeBox">
-          <p>{assignee.username}</p>
-        <button onClick={() => handleRemoveAssignee(assignee)}>X</button>
-      </div>
-      ))}
-      <hr/>
-      {members.map(member => (
-        <div className="member" onClick={() => handleAddAssignee(member)}>
-          <p>{member.username}</p>
+      <div className="allAssigneesBox">
+        {assignees.map(assignee => (
+          <div className="currentAssigneeBox">
+            <i class="fa-solid fa-circle-user fa-2x"></i>
+            <p>{assignee.username}</p>
+          <button onClick={() => handleRemoveAssignee(assignee)} className="cleanButton"><i class="fa-solid fa-trash fa-xl"/></button>
         </div>
-      ))}
+        ))}
+      </div>
+      <hr/>
+      <div className="projectMembersBox">
+        {members.map(member => (
+          <div className="member" onClick={() => handleAddAssignee(member)}>
+            <p className="memberUser">{member.username}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

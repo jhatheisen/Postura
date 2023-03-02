@@ -45,42 +45,55 @@ function EditTaskFormModal({task}) {
   };
 
   return (
-    <>
+    <div className="editTaskBox">
       <h1>Edit Task</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="editTaskForm">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx} className="errorText">{error}</li>
           ))}
         </ul>
-        <label>
-          Name
+        <div>
+          <label for="name">
+            Name
+          </label>
           <input
             type="text"
+            id="name"
             value={name}
+            maxLength={25}
+            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Description
+        </div>
+        <div>
+          <label for="description">
+            Description (optional)
+          </label>
           <textarea
             type="textarea"
+            id="description"
             value={description}
+            placeholder="Description"
+            maxLength={250}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </label>
-        <label>
-          Due Date
+        </div>
+        <div>
+          <label for="dueDate">
+            Due Date
+          </label>
           <input
             type="date"
+            id="dueDate"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />
-        </label>
+        </div>
         <button type="submit" className="cleanButton">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -9,12 +9,18 @@ import { thunkGetUsers } from "../../store/session";
 function UsersProjectFormModal({project}) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loadPage, setLoadPage] = useState(false)
   const [email, setEmail] = useState("");
 
   useEffect(() => {
     dispatch(thunkGetUsers())
     dispatch(thunkGetProject(project.id))
-  },[dispatch])
+
+    return () => {
+      setErrors([])
+      setLoadPage(false)
+    }
+  },[dispatch, loadPage])
 
   const users = useSelector(state => state.session.users);
   const currUser = useSelector(state => state.session.user);
@@ -37,6 +43,7 @@ function UsersProjectFormModal({project}) {
     }
     else {
       setEmail("")
+      setLoadPage(true)
     }
   };
 
@@ -50,26 +57,31 @@ function UsersProjectFormModal({project}) {
     }
     else {
       setEmail("")
+      setLoadPage(true)
     }
   }
 
   if (!projectDetails) return null
 
   return (
-    <div className="membersModal">
+    <div className="membersBox">
       <h1>Manage Members</h1>
       <hr/>
-      <form onSubmit={handleSubmit}>
-        <h2>Invite by Email</h2>
-        <label>
-          Email
+      <h2>Invite by Email</h2>
+      <form onSubmit={handleSubmit} className="membersForm">
+        <div className="flexCol">
+          <label for="email">
+            Email
+          </label>
           <input
-            type="text"
+            type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="email@email.com"
             required
             />
-        </label>
+        </div>
         <button type="submit" className="cleanButton">Submit</button>
         <ul>
           {errors.map((error, idx) => (
@@ -77,19 +89,23 @@ function UsersProjectFormModal({project}) {
           ))}
         </ul>
       </form>
-      <div className="currMembers">
-        <hr/>
-        <h2>Current Members</h2>
-        {projectDetails.users.map(user => {
-          if (user.id == currUser.id) return <></>
-          return (
-            <div className="currentMemberBox">
-              <p>{user.username}</p>
-              <button onClick={() => handleRemoveUser(user)}>X</button>
-            </div>
-          )
-        })}
-      </div>
+      <hr/>
+      <h2>Current Members</h2>
+        <div className="allMembers">
+          {projectDetails.users.map(user => {
+            if (user.id == currUser.id) return <></>
+            return (
+              <div className="currentMemberBox">
+                <i class="fa-solid fa-circle-user fa-2x"></i>
+                <p>{user.username}</p>
+                <button onClick={() => handleRemoveUser(user)} className="cleanButton"><i class="fa-solid fa-trash fa-xl"></i></button>
+              </div>
+            )
+          })}
+          { projectDetails.users.length <= 1 && (
+            <h3>No members for project :(</h3>
+          )}
+        </div>
     </div>
   );
 }

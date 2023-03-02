@@ -1,0 +1,12 @@
+.editProjectBox, .editProjectForm {
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.editProjectForm * {
+  width: 90%;
+  padding: 10px;
+}

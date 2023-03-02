@@ -30,17 +30,30 @@
 
 .projectBox {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  /* border: #1E1F21 1px solid; */
+  padding: 10px;
+  width: fit-content;
+  border-radius: 12px;
 }
 
-.CreateProjectButton {
+.createProjectButton {
   width: fit-content;
 }
 
 .projectDropdown {
   background-color: #1E1F21;
   position: absolute;
-  display: flex;
-  flex-direction: column;
   padding: 5px;
   border-radius: 12px;
+}
+
+.fa-list-check {
+  color: white;
+}
+
+.createProjectDiv {
+  padding: 10px;
 }
