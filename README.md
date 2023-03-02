@@ -6,6 +6,16 @@ This is the repository for the Postura Website.
 
 https://postura.onrender.com
 
+
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/106848904/222584063-1ab97942-f60c-4f5e-95a4-0fde2e8762e3.png)
+![image](https://user-images.githubusercontent.com/106848904/222584134-bab45259-1def-4c0c-a8be-18f34f28f2b0.png)
+![image](https://user-images.githubusercontent.com/106848904/222584445-f7f11ae7-ce84-4ae7-929c-d61d3d3f62e0.png)
+
+
+
+
 ## Wiki Link
 * [API Documentation](https://github.com/jhatheisen/Postura/wiki/API-routes)
 * [Database Schema](https://github.com/jhatheisen/Postura/wiki/Database-Schema)
