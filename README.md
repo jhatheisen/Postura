@@ -1,10 +1,37 @@
-# Postura
+# ![logo-no-background](https://user-images.githubusercontent.com/106848904/222582532-03b094ce-1fa8-4736-803c-8facc323092b.png)
 
-This is the starter for the Postura Website.
+This is the repository for the Postura Website.
 
 ## Live Link
 
 https://postura.onrender.com
+
+## Wiki Link
+* [API Documentation](https://github.com/jhatheisen/Postura/wiki/API-routes)
+* [Database Schema](https://github.com/jhatheisen/Postura/wiki/Database-Schema)
+* [Feature List](https://github.com/jhatheisen/Postura/wiki/Features)
+* [Redux Store Shape](https://github.com/jhatheisen/Postura/wiki/Redux-Store)
+* [Feature List](https://github.com/jhatheisen/Postura/wiki/Features)
+* [User Stories](https://github.com/jhatheisen/Postura/wiki/User-Stories)
+* [Wireframe](https://github.com/jhatheisen/Postura/wiki/Wireframes)
+
+## Tech Stack
+* Frameworks, Platforms, and Libraries: 
+  * Javascript
+  * Python
+  * HTML5
+  * CSS3
+  * Node.js
+  * React
+  * Redux
+  * Flask
+  * SQLAlchemy
+  * Alembic
+* Database
+  * Postgres
+  * SQLite3
+* Hosting
+  * Render
 
 ## Getting started
 1. Clone this repository (only this branch)
