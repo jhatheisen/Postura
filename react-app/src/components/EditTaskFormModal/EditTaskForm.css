@@ -4,6 +4,12 @@
   flex-direction: column;
   align-items: center;
   width: 400px;
+  max-height: 50vh;
+}
+
+.editTaskBox {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .editTaskForm * {

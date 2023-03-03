@@ -4,6 +4,12 @@
   flex-direction: column;
   align-items: center;
   width: 400px;
+  max-height: 50vh;
+}
+
+.createTaskBox {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .createTaskForm * {

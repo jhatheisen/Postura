@@ -7,17 +7,21 @@
   width: 400px;
 }
 
+.membersBox {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .membersBox, .membersForm {
   display: flex;
   border-radius: 12px;
   flex-direction: column;
   align-items: center;
   width: 400px;
+  max-height: 50vh;
 }
 
 .membersForm * {
   width: 90%;
   padding: 10px;
 }
-
-
