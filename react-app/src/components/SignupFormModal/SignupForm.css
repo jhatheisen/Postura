@@ -1,0 +1,12 @@
+.loginBox, .loginForm {
+  display: flex;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.loginForm * {
+  width: 90%;
+  padding: 10px;
+}
