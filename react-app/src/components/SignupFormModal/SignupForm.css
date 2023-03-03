@@ -1,12 +1,17 @@
-.loginBox, .loginForm {
+.signupBox, .signupForm {
   display: flex;
   border-radius: 12px;
   flex-direction: column;
   align-items: center;
   width: 400px;
+  max-height: 50vh;
+}
+.signupBox {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.loginForm * {
+.signupForm * {
   width: 90%;
   padding: 10px;
 }
